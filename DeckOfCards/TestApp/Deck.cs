@@ -12,13 +12,13 @@ public class Deck
     {
 
         int rndx;
-        foreach(Card.Suit suit in Enum.GetValues(typeof(Card.Suit)))
+        foreach (Card.Suit suit in Enum.GetValues(typeof(Card.Suit)))
         {
-            for(rndx = 0; rndx < 13; rndx++)
+            for (rndx = 0; rndx < 13; rndx++)
             {
                 Cards.Add(new Card(suit, rndx));
             }
-            
+
         }
         this.count = Cards.Count();
 
@@ -27,7 +27,7 @@ public class Deck
 
     public void displayDeck()
     {
-        foreach(Card card in Cards)
+        foreach (Card card in Cards)
         {
             Console.WriteLine($"{card}");
         }
@@ -49,7 +49,8 @@ public class Deck
         Console.WriteLine("How many?");
         int num = Convert.ToInt32(Console.ReadLine());
 
-        if(num > count){
+        if (num > count)
+        {
             Console.WriteLine("Not enough cards in deck.");
             return;
         }
@@ -58,7 +59,7 @@ public class Deck
         {
             int ran = rng.Next(Cards.Count());
             Card temp = Cards[ran];
-            if(temp != null)
+            if (temp != null)
             {
                 Console.WriteLine($"{temp}");
                 Cards.Remove(temp);
@@ -68,5 +69,4 @@ public class Deck
 
         this.count = Cards.Count();
     }
-
 }

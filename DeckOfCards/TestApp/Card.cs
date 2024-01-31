@@ -2,7 +2,8 @@ using System.Diagnostics.Contracts;
 
 namespace testapp;
 
-public class Card{
+public class Card
+{
 
     public string[] ranks = ["Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"];
     public enum Suit
@@ -13,10 +14,8 @@ public class Card{
         Diamond
     }
 
-    public Suit suit{get; set;}
-    public int rank{get; set;}
-
-
+    public Suit suit { get; set; }
+    public int rank { get; set; }
 
     public Card(Suit suit, int rank)
     {

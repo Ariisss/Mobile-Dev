@@ -4,11 +4,12 @@ class Program
 {
     static void Main(string[] args)
     {
-
-        int action;
+        short action;
+        bool isValid;
         Deck deck = new Deck();
-        
-        do{
+
+        do
+        {
             Console.WriteLine("\nChoose action: ");
             Console.WriteLine("0 - Exit Game");
             Console.WriteLine("1 - Create Deck");
@@ -16,33 +17,47 @@ class Program
             Console.WriteLine("3 - Deal");
             Console.WriteLine("4 - Display Deck\n");
 
-            action = Convert.ToInt16(Console.ReadLine());
+            do
+            {
+                Console.WriteLine("\nPlease enter your choice: ");
+                isValid = short.TryParse(Console.ReadLine(), out action);
+                if (!isValid)
+                {
+                    Console.WriteLine("\nError: Input is not an integer!\n");
+                }
+            } while (!isValid);
 
-            switch(action)
+            switch (action)
             {
                 case 0:
                     Console.WriteLine("\nGame Ended!\n");
                     break;
                 case 1:
-                    if(deck.Cards.Count == 0)
+                    if (deck.Cards.Count == 0)
                     {
                         Console.WriteLine("\nCreating Deck\n");
                         deck.createDeck();
-                    }else{
+                    }
+                    else
+                    {
                         Console.WriteLine("There is an existing deck.");
                     }
                     break;
                 case 2:
-                    if(deck.Cards.Count > 1)
+                    if (deck.Cards.Count > 1)
                     {
                         Console.WriteLine("\nShuffling Deck\n");
                         deck.shuffleDeck();
-                    }else if(deck.Cards.Count == 1)
+                    }
+                    else if (deck.Cards.Count == 1)
                     {
                         Console.WriteLine("Only 1 card in deck!");
-                    }else{
+                    }
+                    else
+                    {
                         Console.WriteLine("No existing deck");
                     }
+
                     break;
                 case 3:
                     deck.Deal();
@@ -56,8 +71,6 @@ class Program
                     Console.WriteLine("\nChoose a valid number.\n");
                     break;
             }
-            
-        }while(action != 0);
-
+        } while (action != 0);
     }
 }

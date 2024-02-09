@@ -1,87 +1,153 @@
-﻿
-
-namespace Calculator
+﻿class Calculator
 {
-    internal class Program
+    public double Add(double x, double y)
     {
-        static void Main(string[] args)
+        return x + y;
+    }
 
+    public double Subtract(double x, double y)
+    {
+        return x - y;
+    }
+
+    public double Multiply(double x, double y)
+    {
+        return x * y;
+    }
+
+    public double Divide(double x, double y)
+    {
+        return x / y;
+    }
+
+    public void Menu()
+    {
+        Console.WriteLine("Operations:");
+        Console.WriteLine("1 - Add");
+        Console.WriteLine("2 - Subtract");
+        Console.WriteLine("3 - Multiply");
+        Console.WriteLine("4 - Divide");
+        Console.Write("Choice: ");
+    }
+
+    public void AskInteger(ref int option)
+    {
+        while (!int.TryParse(Console.ReadLine(), out option))
         {
-            
-            Calc compute = new Calc();
-            double[] values = new double[2];
-            double memory = 0;
-            bool temp = false;
-            int action;
+            Console.Write("Invalid input. Please enter a valid option: ");
+        }
+    }
 
-            do
+    public void AskDouble(ref double operand)
+    {
+        while (!double.TryParse(Console.ReadLine(), out operand))
+        {
+            Console.Write("Invalid input. Please enter a valid number: ");
+        }
+    }
+
+}
+
+class Program
+{
+    static void Main()
+    {
+        bool isRunning = true;
+        bool isRemembered = false;
+        Calculator calculator = new Calculator();
+        int option = 0;
+        double left = 0;
+        double right = 0;
+
+        do
+        {
+            if (!isRemembered)
             {
+                Console.Write("Enter the first operand: ");
+                calculator.AskDouble(ref left);
+            }
 
-                if(memory != 0)
-                {
-                    Console.WriteLine("\nUse last calculation's result?\nENTER IF NO, TYPE ANYTHING FOR YES.\n");
-                    string input = Console.ReadLine() ?? "";
-                    if (!string.IsNullOrEmpty(input))
-                    {
-                        temp = true;
-                        values[0] = memory;
-                    }
-                }
+            isRemembered = false;
 
-                if (!temp)
-                {
-                    Console.Write("Choose 1st Operand: ");
-                    while (!double.TryParse(Console.ReadLine(), out values[0]))
-                    {
-                        Console.Write("Invalid operand, choose a valid number: ");
-                    };
-                }
+            Console.Write("Enter the second operand: ");
+            calculator.AskDouble(ref right);
 
-                Console.Write("Choose 2nd Operand: ");
-                while (!double.TryParse(Console.ReadLine(), out values[1]))
-                {
-                    Console.Write("Invalid operand, choose a valid number: ");
-                }
+            calculator.Menu();
+            calculator.AskInteger(ref option);
 
-                Console.WriteLine("\nOperations:");
-                Console.WriteLine("1.) Addition");
-                Console.WriteLine("2.) Subtraction");
-                Console.WriteLine("3.) Multiplication");
-                Console.WriteLine("4.) Division");
-                Console.WriteLine("Invalid operation will restart the app.");
-                Console.Write("\nChoice: ");
-                while(!int.TryParse(Console.ReadLine(), out action))
-                {
-                    Console.Write("Enter a valid number: ");
-                }
+            int isSucessful = 0;
 
-                switch (action)
+            switch (option)
+            {
+                case 1:
+                    isSucessful = 1;
+                    left = calculator.Add(left, right);
+                    Console.WriteLine("Sum: " + left);
+                    break;
+                case 2:
+                    isSucessful = 2;
+                    left = calculator.Subtract(left, right);
+                    Console.WriteLine("Difference: " + left);
+                    break;
+                case 3:
+                    isSucessful = 3;
+                    left = calculator.Multiply(left, right);
+                    Console.WriteLine("Product: " + left);
+                    break;
+                case 4:
+                    isSucessful = 4;
+                    left = calculator.Divide(left, right);
+                    Console.WriteLine("Quotient: " + left);
+                    break;
+                default:
+                    Console.WriteLine("Invalid input. Operation does not exist!");
+                    break;
+            }
+
+            if (isSucessful > 0)
+            {
+                string message = "result";
+
+                switch (isSucessful)
                 {
                     case 1:
-                        memory = compute.sum(values[0], values[1]);
-                        Console.WriteLine("Result: " + memory);
+                        message = "sum";
                         break;
                     case 2:
-                        memory = compute.difference(values[0], values[1]);
-                        Console.WriteLine("Result: " + memory);
+                        message = "difference";
                         break;
                     case 3:
-                        memory = compute.product(values[0], values[1]);
-                        Console.WriteLine("Result: " + memory);
+                        message = "product";
                         break;
                     case 4:
-                        memory = compute.quotient(values[0], values[1]);
-                        Console.WriteLine("Result: " + memory);
+                        message = "quotient";
                         break;
-                    default:
-                        Console.WriteLine("Invalid operation!\n"); break;
                 }
 
-                temp = false;
+                Console.WriteLine("Do you want to use the previous " + message + "? (y/n)");
 
-            } while(true);
+                string input;
+                bool validInput = false;
 
-        }
+                while (!validInput)
+                {
+                    Console.Write("Please enter 'y' or 'n': ");
+                    input = Console.ReadLine() ?? "";
 
+                    if (input == "y" || input == "n")
+                    {
+                        validInput = true;
+                        if (input == "y")
+                        {
+                            isRemembered = true;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input. Please enter 'y' or 'n'.");
+                    }
+                }
+            }
+        } while (isRunning);
     }
 }

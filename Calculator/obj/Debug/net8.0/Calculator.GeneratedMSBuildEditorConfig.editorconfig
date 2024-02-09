@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Calculator
-build_property.ProjectDir = C:\Users\Aris\Desktop\2203\calculator\
+build_property.ProjectDir = /home/boyo/Documents/2203/Calculator/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

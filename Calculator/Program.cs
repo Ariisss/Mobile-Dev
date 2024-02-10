@@ -1,36 +1,34 @@
-﻿
-
-namespace Calculator
+﻿namespace Calculator
 {
     internal class Program
     {
         static void Main(string[] args)
-
         {
-            
-            Calc compute = new Calc();
-            double[] values = new double[2];
             double memory = 0;
-            bool temp = false;
+            bool useMemory = false;
+            double[] values = new double[2];
+            Calc compute = new Calc();
             int action;
 
             do
             {
-
-                if(memory != 0)
+                // What if the result of the previous result was 0?
+                if (memory != 0)
                 {
                     Console.WriteLine("\nUse last calculation's result?\nENTER IF NO, TYPE ANYTHING FOR YES.\n");
                     string input = Console.ReadLine() ?? "";
+
                     if (!string.IsNullOrEmpty(input))
                     {
-                        temp = true;
+                        useMemory = true;
                         values[0] = memory;
                     }
                 }
 
-                if (!temp)
+                if (!useMemory)
                 {
                     Console.Write("Choose 1st Operand: ");
+
                     while (!double.TryParse(Console.ReadLine(), out values[0]))
                     {
                         Console.Write("Invalid operand, choose a valid number: ");
@@ -38,6 +36,7 @@ namespace Calculator
                 }
 
                 Console.Write("Choose 2nd Operand: ");
+
                 while (!double.TryParse(Console.ReadLine(), out values[1]))
                 {
                     Console.Write("Invalid operand, choose a valid number: ");
@@ -50,7 +49,8 @@ namespace Calculator
                 Console.WriteLine("4.) Division");
                 Console.WriteLine("Invalid operation will restart the app.");
                 Console.Write("\nChoice: ");
-                while(!int.TryParse(Console.ReadLine(), out action))
+
+                while (!int.TryParse(Console.ReadLine(), out action))
                 {
                     Console.Write("Enter a valid number: ");
                 }
@@ -58,30 +58,27 @@ namespace Calculator
                 switch (action)
                 {
                     case 1:
-                        memory = compute.sum(values[0], values[1]);
+                        memory = compute.Sum(values[0], values[1]);
                         Console.WriteLine("Result: " + memory);
                         break;
                     case 2:
-                        memory = compute.difference(values[0], values[1]);
+                        memory = compute.Difference(values[0], values[1]);
                         Console.WriteLine("Result: " + memory);
                         break;
                     case 3:
-                        memory = compute.product(values[0], values[1]);
+                        memory = compute.Product(values[0], values[1]);
                         Console.WriteLine("Result: " + memory);
                         break;
                     case 4:
-                        memory = compute.quotient(values[0], values[1]);
+                        memory = compute.Quotient(values[0], values[1]);
                         Console.WriteLine("Result: " + memory);
                         break;
                     default:
                         Console.WriteLine("Invalid operation!\n"); break;
                 }
 
-                temp = false;
-
-            } while(true);
-
+                useMemory = false;
+            } while (true);
         }
-
     }
 }

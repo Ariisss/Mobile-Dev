@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "s7vFXvAEb4Onq0Ztxx/nlkIzYE2Rrh665C9ZaHoPKATuMYlgLDlKozKaSm8Q8l3u3DzNiOS9p08WxrxzBWAuOw==",
+  "dgSpecHash": "xkpI7w6sYCpitQeB7xk013yJyEashm4FaIOhoJ/Miln0fYr7SK5YyPctsKJNu2cMD2srMUJOznZUZUxiGl5l3A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Aris\\Desktop\\2203\\calculator\\Calculator.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/home/boyo/Documents/2203/Calculator/Calculator.csproj",
+  "expectedPackageFiles": [
+    "/home/boyo/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.1/microsoft.aspnetcore.app.ref.8.0.1.nupkg.sha512"
+  ],
   "logs": []
 }
